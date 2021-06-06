@@ -2,11 +2,9 @@
 
 I do not want to start a debate on wether XI is an ESB, but more of a statement to what is SAP ESB (if XI it is, then be it).
 
-Today, we discuss what is SAP ESB (Enterprise Service Bus) today (I could not find a clear answer to is)?
+We also discuss uses of SAP ESB in production currently and what kind of environment (i.e. strictly SAP backend systems, or combination of various vendors backend systems).
 
-We also discuss Who uses this SAP ESB in production currently and what kind of environment (i.e. strictly SAP backend systems, or combination of various vendors backend systems).
-
-Today we someone share some light on this topic.
+## What is an ESB? 
 
 As a reminder, an ESB is expected to exhibit the following characteristics (source Wikipedia):
 
@@ -38,21 +36,21 @@ As a reminder, an ESB is expected to exhibit the following characteristics (sour
 
 • It supports queuing, holding messages if applications are temporarily unavailable.
 
------
+## Successfull ESB Implementation
 
-Any successful implementation of SOA/ESA requires applications and infrastructure to support it's principles. This means all the applications either should have the ability to expose their functionality as services or they need an infrastructure to expose the service. SAP XI would definetly help to expose the application functionality as services(web). I dare to call as a 'service container' in ESB terminology.
+• Any successful implementation of SOA/ESA requires applications and infrastructure to support it's principles. This means all the applications either should have the ability to expose their functionality as services or they need an infrastructure to expose the service. SAP XI would definetly help to expose the application functionality as services(web). I dare to call as a 'service container' in ESB terminology.
 
-Besides the service repository functionality, XI also provides value added services like intelligent routing, mapping, auditing functionality etc.
+• Besides the service repository functionality, XI also provides value added services like intelligent routing, mapping, auditing functionality etc.
 
-And also distributed deployment(ESB quality for scaling) of some of the XI components are possible. Say for example, adapter deployment options(central, decentral), PCK, proxy framework etc.
+• And also distributed deployment(ESB quality for scaling) of some of the XI components are possible. Say for example, adapter deployment options(central, decentral), PCK, proxy framework etc.
 
-On the security aspect of these exposed service, my understanding is that XI do not have much (like ws-security, xml signature, encryption, etc).
+• On the security aspect of these exposed service, my understanding is that XI do not have much (like ws-security, xml signature, encryption, etc).
 
-Business Process Modelling(BPEL4WS conformance) can be used for the service choreography. I am not sure whether CAF and VC supports BPEL standards.
+• Business Process Modelling(BPEL4WS conformance) can be used for the service choreography. *I am not sure whether CAF and VC supports BPEL standards.*
 
-Can anybody throw some thougths on this. And also what are the webservice management tools(deploying, declarative security etc) available in NetWeaver?
+• *Can anybody throw some thougths on this?* And also what are the webservice management tools(deploying, declarative security etc) available in NetWeaver?
 
------
+## Piecing together ESB + SOA Mechanism
 
 I had quite a difficult time understanding the concept of ESB and how it fits into the SOA picture.
 
@@ -60,7 +58,7 @@ Reading across a lot of documents and trying out with a few ESB products have he
 
 Tis time taking experience motivated to put down my understanding in a blog. Hope will help to streamline the approach for people who are new to ESB.
 
- 
+## Blog Post 1- ESB Fundamentals, capabilities, components, mediation and usage patterns.
 
 In this blog series, I will discuss about the following topics —
 
@@ -80,18 +78,14 @@ ESB –Deployment Models
 
 In the first blog lets look into the fundamentals – need and definition of ESB and some basic concepts .
 
-Need for ESB
+**Need for ESB**
 
 The traditional architecture of point to point interfaces lead to high integration costs and inflexibility into the IT landscape. It has lead to the evolution of SOA architecture. ESB helps us to sustain SOA. It also helps us to enrich our Service Provisioning Capabilities.
 
-ESB Definition
+**ESB Definition**
 
 An enterprise service bus (ESB) is a software architecture for middleware that provides fundamental services for more complex architectures.
 The ESB represents the piece of software that lies between the business applications and enables communication among them.
-
- 
-
-image
 
 The diagram above shows the high level functions of the ESB.ESB should should be treated as a Software ans not as a hardware. Because of the name Service Bus it is sometimes confused as being a part of the hardware. But the term “Service Bus” is analogous. Use of the word “bus” stems from the physical bus that carries bits between devices in a computer. The enterprise service bus serves an analogous function at a higher level of abstraction. The inner bubbles such as Routing , Security consists of some of the functionality of ESB. We will discuss these in the sections below.
 
@@ -127,12 +121,6 @@ The definitions and illustration of these fundamental concepts will help to unde
 
 Point to Point v/s Mediated Central Communication
 
- 
-
-image
-
- 
-
 In point to point communication any two systems to interact with via a dedicated connection. With the increase in systems the number of dedicated connections increase beyond comfort. There are issues of maintenance and governance in such a landscape
 
 In a Central landscape all messages and data flow through a central system – a Broker , an ESB or a Gateway. It helps to imply Central Governance , Security etc. The most important advantage is we do not need point to point connectors but only a connection from the concerned system to the ESB.
@@ -159,19 +147,10 @@ The diagram above gives an example of how an XML message was mapped via ESB into
 
 We can have other manipulations on data like -data format conversion , Unicode- non Unicode conversions , data enrichment, data unification from two or more sources and so on.
 
- 
 
- 
-
-  3. Routing
-
- image
-
- 
+3. Routing
 
 Routing is the concept of sending input message to the required receiver ,In the about we have a diagram of a broadcast , where whole of the input message is being transmitted to all three receivers.
-
- 
 
 But we can have various types of routing based on our requirements –
 
@@ -185,7 +164,6 @@ But we can have various types of routing based on our requirements –
 
 5. Content Based Routing – In this input message is inspected and based on the routing rules, the routing is performed.
 
- 
 One practical example of routing could be –
 
 We have raised a Sales Order Request , based on the Product Ordered– Corresponding Supplier relationship (which has been maintained in the routing table) , the ESB will invoke the Create Order Service in the corresponding Supplier’s System
